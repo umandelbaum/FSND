@@ -99,9 +99,8 @@ class Team(db.Model):
     def format(self):
         return {
         'name': self.name,
-        'secret_identity': self.secret_identity,
-        'hometown': self.hometown,
-        'power_level': self.power_level,
+        'secret_identity': self.name,
+        'hometown': self.location,
         'members': [member.name for member in self.members]
         }
 
