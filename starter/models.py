@@ -8,7 +8,7 @@ import json
 
 database_name = "heroes"
 database_path = "postgres://{}/{}".format(
-    os.environ.get('DATABASE_URL', 'localhost:5432'), 
+    os.environ.get('DATABASE_URL', 'localhost:5432'),
     database_name)
 
 app = Flask(__name__)
@@ -22,16 +22,23 @@ moment = Moment(app)
 '''
 Associating Table for Teams and Members
 '''
-teams_members = db.Table('team_members',
-    db.Column('team_id', db.Integer, db.ForeignKey('Team.id'), primary_key=True),
-    db.Column('hero_id', db.Integer, db.ForeignKey('Hero.id'), primary_key=True)
-)
+teams_members = db.Table('team_members', /
+                         db.Column('team_id',
+                                   db.Integer,
+                                   db.ForeignKey('Team.id'),
+                                   primary_key=True),
+                         db.Column('hero_id',
+                                   db.Integer,
+                                   db.ForeignKey('Hero.id'),
+                                   primary_key=True))
 
 '''
 Hero
 
 '''
-class Hero(db.Model):  
+
+
+class Hero(db.Model):
     __tablename__ = 'heroes'
 
     id = Column(Integer, primary_key=True)
@@ -40,7 +47,7 @@ class Hero(db.Model):
     hometown = Column(String)
     power_level = Column(Integer)
     teams = db.relationship('Hero', secondary=teams_members,
-        back_populates='members')
+                            back_populates='members')
 
     def __init__(self, name, secret_identity, hometown, power_level):
         self.name = name
@@ -51,7 +58,7 @@ class Hero(db.Model):
     def insert(self):
         db.session.add(self)
         db.session.commit()
-    
+
     def update(self):
         db.session.commit()
 
@@ -61,34 +68,38 @@ class Hero(db.Model):
 
     def format(self):
         return {
-        'name': self.name,
-        'secret_identity': self.secret_identity,
-        'hometown': self.hometown,
-        'power_level': self.power_level,
-        'team_memberships': [team.name for team in self.teams]
+            'id': self.id,
+            'name': self.name,
+            'secret_identity': self.secret_identity,
+            'hometown': self.hometown,
+            'power_level': self.power_level,
+            'team_memberships': [team.name for team in self.teams]
         }
+
 
 '''
 Team
 
 '''
-class Team(db.Model):  
+
+
+class Team(db.Model):
     __tablename__ = 'teams'
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
     location = Column(String)
     members = db.relationship('Hero', secondary=teams_members,
-        back_populates='teams')
-    
+                              back_populates='teams')
+
     def __init__(self, name, location):
         self.name = name
         self.location = location
-        
+
     def insert(self):
         db.session.add(self)
         db.session.commit()
-    
+
     def update(self):
         db.session.commit()
 
@@ -98,9 +109,9 @@ class Team(db.Model):
 
     def format(self):
         return {
-        'name': self.name,
-        'secret_identity': self.name,
-        'hometown': self.location,
-        'members': [member.name for member in self.members]
+            'id': self.id,
+            'name': self.name,
+            'secret_identity': self.name,
+            'hometown': self.location,
+            'members': [member.name for member in self.members]
         }
-
