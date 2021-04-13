@@ -9,11 +9,8 @@ from flask_moment import Moment
 import json
 import babel
 
-database_name = "heroes"
-database_uri = os.environ.get('DATABASE_URL', 'uri:2@localhost:5432')
-database_path = "postgresql://{}/{}".format(
-    database_uri,
-    database_name)
+local_database = "postgresql://uri:2@localhost:5432/heroes"
+database_path = os.environ.get('DATABASE_URL', local_database)
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_path
