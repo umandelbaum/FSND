@@ -1,0 +1,953 @@
+{
+	"info": {
+		"_postman_id": "c952177b-ac14-428f-9db7-e72cc369b2b1",
+		"name": "herodb Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "contributor",
+			"item": [
+				{
+					"name": "/heroes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"The Body\",\n    \"secret_identity\": \"Tom Hardy\",\n    \"hometown\": \"Las Vegas\",\n    \"power_level\": \"7\"\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/heroes",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes"
+							]
+						},
+						"description": "Post new hero"
+					},
+					"response": []
+				},
+				{
+					"name": "/heroes/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"power_level\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/heroes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes",
+								"1"
+							]
+						},
+						"description": "Edit existing hero"
+					},
+					"response": []
+				},
+				{
+					"name": "/heroes/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"team_id\": \"1\"\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/heroes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes",
+								"1"
+							]
+						},
+						"description": "Add hero to team"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vegas Buds\",\n    \"location\": \"Las Vegas\"\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/teams",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams"
+							]
+						},
+						"description": "Post new team"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vegas Not Friends\"\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/teams/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams",
+								"1"
+							]
+						},
+						"description": "Edit existing team"
+					},
+					"response": []
+				},
+				{
+					"name": "/heroes/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/heroes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes",
+								"1"
+							]
+						},
+						"description": "Contributor attempt to delete a hero - should result in 401"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/teams/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams",
+								"1"
+							]
+						},
+						"description": "Contributor attempt to delete a team - should result in 401"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InFoczg3cHRlLV9nNzdwQTlmVERHeSJ9.eyJpc3MiOiJodHRwczovL21hbmRlbGJhdW0tZnNuZC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjA0Nzk5YTQzZjg0NzMwMDZmNTY5MWJhIiwiYXVkIjoiaGVyb2RiIiwiaWF0IjoxNjE4MzMxNTM2LCJleHAiOjE2MTg0MTc5MzYsImF6cCI6ImdmVFowZHA1anJENVRzM1hpM094VmRFc01vOXY2Wno3Iiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJwYXRjaDppbmZvIiwicG9zdDppbmZvIl19.ZW2elbCegbjzJ6F1zgSb5OqnJF_lnN26lDFVKtYjDzG-dls0-CDRDu0ocGYYhdWkTkLLhJAB4wkrbOVSi8-RVxorTis1jspsvY_sieD1Lu2W4JT8DTaECmYQG7wiK5bxOfxH-wF1SoW79AR2JtADaLE7pe-QfJTGxbLPpGEASFljvaWdvhbIo1qQQV0hHXvjfJcFjfLBvQwnLFuSWuGC7e9Q_o-Z4zUbmfMJOU3EPB-9UlC6zsVrDvyYivaCoZFCF4QXvLx9MhP_rUhOZFoObKcNiZwuo3qU6g7KoXzwN-k6KOYVuz3uFBqnDrkHq-DVYka5CGqBMECi8G-d84MV_A",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "/heroes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains heroes array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.heroes).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/heroes",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes"
+							]
+						},
+						"description": "Get the list of all heroes"
+					},
+					"response": []
+				},
+				{
+					"name": "/heroes/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/heroes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes",
+								"1"
+							]
+						},
+						"description": "Get particular hero"
+					},
+					"response": []
+				},
+				{
+					"name": "/heroes?page=10000",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/heroes?page=10000",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "10000"
+								}
+							]
+						},
+						"description": "Get the list of all heroes, but at a page that doesn't exist"
+					},
+					"response": []
+				},
+				{
+					"name": "/heroes/10000",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/10000",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"10000"
+							]
+						},
+						"description": "Get a particular hero, but which doesn't exist"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains teams array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.teams).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/teams",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams"
+							]
+						},
+						"description": "Get the list of all teams"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/teams/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams",
+								"1"
+							]
+						},
+						"description": "Get particular team"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams?page=10000",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/teams?page=10000",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "10000"
+								}
+							]
+						},
+						"description": "Get the list of all teams, but at page that doesn't exist"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams/10000",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/teams/10000",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams",
+								"10000"
+							]
+						},
+						"description": "Get a particular team, but which doesn't exist"
+					},
+					"response": []
+				},
+				{
+					"name": "/heroes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"The Body\",\n    \"secret_identity\": \"Tom Hardy\",\n    \"hometown\": \"Las Vegas\",\n    \"power_level\": \"7\"\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/heroes",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes"
+							]
+						},
+						"description": "Public attempt to post new hero - should fail with 401"
+					},
+					"response": []
+				},
+				{
+					"name": "/heroes/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"power_level\": \"2\"\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/heroes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes",
+								"1"
+							]
+						},
+						"description": "Public attempt to patch a hero - should fail with 401"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vegas Buds\",\n    \"location\": \"Las Vegas\"\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/teams",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams"
+							]
+						},
+						"description": "Public attempt to post new team - should fail with 401"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vegas Not Friends\"\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/teams/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams",
+								"1"
+							]
+						},
+						"description": "Public attempt to patch team - should fail with 401"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "administrator",
+			"item": [
+				{
+					"name": "/heroes/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/heroes/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"heroes",
+								"1"
+							]
+						},
+						"description": "Admin attempt to delete a hero - should result in 200"
+					},
+					"response": []
+				},
+				{
+					"name": "/teams/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/teams/1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"teams",
+								"1"
+							]
+						},
+						"description": "Admin attempt to delete a team - should result in 200"
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6InFoczg3cHRlLV9nNzdwQTlmVERHeSJ9.eyJpc3MiOiJodHRwczovL21hbmRlbGJhdW0tZnNuZC51cy5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NjAzMzE5OGNlMjBiNWEwMDcwMmFhOWIxIiwiYXVkIjoiaGVyb2RiIiwiaWF0IjoxNjE4MzMyNDc1LCJleHAiOjE2MTg0MTg4NzUsImF6cCI6ImdmVFowZHA1anJENVRzM1hpM094VmRFc01vOXY2Wno3Iiwic2NvcGUiOiIiLCJwZXJtaXNzaW9ucyI6WyJkZWxldGU6aW5mbyIsInBhdGNoOmluZm8iLCJwb3N0OmluZm8iXX0.aUw6dSZNzNt9epbW1xMzRDpwbk-1eD9ibGLPiwNJ4BOnyxUoFDiHC3BM3IQosXrmNXWCu-ewjGhPkmUNkMZxwYVjLAO-6NPxVSQ0Rb6JzaQF_qfQkoEW1ULxRSf5DgeLWC8gaDJjNDjI0vzXAQKXWadhTFF_wplg6AMYBRAXPYOzX5CNi-ObkEA2y1tDnqzv55yVTqxyQED3UX-m40V2u6G3CTWSDjpbSkaHhWpNRdsXY5CsY3t_9vRft0sDN3mo79ay3Tyds5-IYwJQWo23_nu1-I7sjmCz13P3TS0QBj9S06RmOlcTRvKiinj-xf_nZj7HFYx3jFWWfW0tQoYeTw",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:5000",
+			"type": "string"
+		}
+	]
+}

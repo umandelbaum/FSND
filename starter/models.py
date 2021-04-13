@@ -116,7 +116,6 @@ class Team(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'secret_identity': self.name,
-            'hometown': self.location,
+            'location': self.location,
             'members': [member.name for member in self.members]
         }

@@ -110,7 +110,7 @@ def update_hero(jwt, hero_id):
         if 'hometown' in body:
             to_update.hometown = body['hometown']
         if 'power_level' in body:
-            to_update.power_level = int(bpdy['power_level'])
+            to_update.power_level = int(body['power_level'])
         to_update.update()
         return jsonify({
             'success': True,
@@ -154,7 +154,7 @@ def add_membership(jwt, hero_id):
     if to_update is None:
         abort(404)
     team_id = int(body['team_id'])
-    new_team = Team.query.filter(Team.id == new_team).one_or_none()
+    new_team = Team.query.filter(Team.id == team_id).one_or_none()
     if new_team is None:
         abort(404)
     to_update.teams.append(new_team)
@@ -180,7 +180,7 @@ def retrieve_teams():
         abort(404)
     return jsonify({
         'success': True,
-        'teams': current_heroes,
+        'teams': current_teams,
         'total_teams': len(all_teams)
     }), 200
 
@@ -273,6 +273,50 @@ def delete_team(jwt, team_id):
         'success': True,
         'delete': team_id
     }), 200
+
+
+# Error Handling
+'''
+error handling for unprocessable entity
+'''
+
+
+@app.errorhandler(422)
+def unprocessable(error):
+    return jsonify({
+                    "success": False,
+                    "error": 422,
+                    "message": "unprocessable"
+                    }), 422
+
+
+'''
+error handler for 404
+'''
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+            "success": False,
+            "error": 404,
+            "message": "resource not found"
+        }), 404
+
+
+'''
+@TODO implement error handler for AuthError
+    error handler should conform to general task above
+'''
+
+
+@app.errorhandler(AuthError)
+def auth_error(error):
+    return jsonify({
+        'success': False,
+        'error': error.error['code'],
+        'message': error.error['description']
+    }), error.status_code
 
 
 if __name__ == '__main__':
