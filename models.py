@@ -8,9 +8,12 @@ from flask_migrate import Migrate
 from flask_moment import Moment
 import json
 import babel
+import re
 
 local_database = "postgresql://uri:2@localhost:5432/heroes"
 database_path = os.environ.get('DATABASE_URL', local_database)
+if database_path.startswith("postgres://"):
+    database_path = database_path.replace("postgres://", "postgresql://", 1)
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_path
