@@ -1,23 +1,28 @@
 
 import os
 from sqlalchemy import Column, String, Integer
+from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_moment import Moment
 import json
+import babel
 
 database_name = "heroes"
-database_path = "postgres://{}/{}".format(
-    os.environ.get('DATABASE_URL', 'localhost:5432'),
+database_path = "postgresql://{}/{}".format(
+    os.environ.get('DATABASE_URL', 'uri:2@localhost:5432'),
     database_name)
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_path
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+CORS(app)
 db = SQLAlchemy(app)
 
-migrate = migrate(app, db)
+migrate = Migrate(app, db)
 moment = Moment(app)
+
 
 '''
 Associating Table for Teams and Members
@@ -25,11 +30,11 @@ Associating Table for Teams and Members
 teams_members = db.Table('team_members',
                          db.Column('team_id',
                                    db.Integer,
-                                   db.ForeignKey('Team.id'),
+                                   db.ForeignKey('teams.id'),
                                    primary_key=True),
                          db.Column('hero_id',
                                    db.Integer,
-                                   db.ForeignKey('Hero.id'),
+                                   db.ForeignKey('heroes.id'),
                                    primary_key=True))
 
 '''
@@ -46,7 +51,7 @@ class Hero(db.Model):
     secret_identity = Column(String)
     hometown = Column(String)
     power_level = Column(Integer)
-    teams = db.relationship('Hero', secondary=teams_members,
+    teams = db.relationship('Team', secondary=teams_members,
                             back_populates='members')
 
     def __init__(self, name, secret_identity, hometown, power_level):
