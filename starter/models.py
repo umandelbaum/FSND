@@ -10,8 +10,9 @@ import json
 import babel
 
 database_name = "heroes"
+database_uri = os.environ.get('DATABASE_URL', 'uri:2@localhost:5432')
 database_path = "postgresql://{}/{}".format(
-    os.environ.get('DATABASE_URL', 'uri:2@localhost:5432'),
+    database_uri,
     database_name)
 
 app = Flask(__name__)
