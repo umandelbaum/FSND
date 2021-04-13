@@ -80,7 +80,7 @@ def create_app(test_config=None):
             return jsonify({
                 'success': True,
                 'hero': new_hero.format()
-            })
+            }), 200
         except Exception as e:
             print(e)
             abort(422)
@@ -175,17 +175,76 @@ def create_app(test_config=None):
     Returns 404 if no team exists with the given id
     '''
     @app.route('/teams/<int:team_id>', methods=['GET'])
-    def retrieve_hero(team_id):
+    def retrieve_team(team_id):
         team = Team.query.filter(Team.id == team_id).one_or_none()
         if team is None:
             abort(404)
         return jsonify({
             'success': True,
             'team': team.format()
-        })
-    
-    
-    
+        }), 200
+    '''
+    Post route to add a team
+    Returns the team's information with id
+    ''''
+    @app.route('/teams', methods=['POST'])
+    @requires_auth('post:info')
+    def create_team(jwt):
+        body = request.get_json()
+        try:
+            new_name = body['name']
+            new_home = body['location']
+            new_team = Team(name=new_name,
+                            location=new_home)
+            new_team.insert()
+            return jsonify({
+                'success': True,
+                'team': new_team.format()
+            })
+        except Exception as e:
+            print(e)
+            abort(422)
+
+    '''
+    Patch route to update team information
+    Returns the updated team's information
+    '''
+    @app.route('/teams/<int:team_id>', methods=['PATCH'])
+    @requires_auth('patch:info')
+    def update_team(jwt, team_id):
+        body = request.get_json()
+        to_update = Team.query.filter(Team.id == team_id).one_or_none()
+        if to_update is None:
+            abort(404)
+        try:
+            if 'name' in body:
+                to_update.name = body['name']
+            if 'location' in body:
+                to_update.location = body['location']
+            to_update.update()
+            return jsonify({
+                'success': True,
+                'team': to_update.format()
+            }), 200
+        except Exception as e:
+            print(e)
+            abort(422)
+
+    '''
+    Delete route for a team
+    Returns status code of 200 and team ID if team was deleted
+    '''
+    @app.route('/teams/<int:team_id>', methods=['DELETE'])
+    @requires_auth('delete:info')
+    def delete_team(jwt, team_id):
+        to_delete = Team.query.filter(Team.id == team_id).one_or_none()
+        if to_delete is None:
+            abort(404)
+        to_delete.delete()
+        return jsonify({
+            'success': True,
+            'delete': team_id
+        }), 200
 
 
 return app

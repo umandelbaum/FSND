@@ -7,7 +7,7 @@ from urllib.request import urlopen
 
 AUTH0_DOMAIN = 'mandelbaum-fsnd.us.auth0.com'
 ALGORITHMS = ['RS256']
-API_AUDIENCE = 'coffee'
+API_AUDIENCE = 'herodb'
 
 
 # AuthError Exception
@@ -107,7 +107,7 @@ verify_decode_jwt(token) method
     it should validate the claims
     return the decoded payload
 
-    !!NOTE urlopen has a common certificate error described here: 
+    !!NOTE urlopen has a common certificate error described here:
     https://stackoverflow.com/questions/50236117/scraping-ssl-certificate-verify-failed-error-for-http-en-wikipedia-org
 '''
 

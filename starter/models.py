@@ -22,7 +22,7 @@ moment = Moment(app)
 '''
 Associating Table for Teams and Members
 '''
-teams_members = db.Table('team_members', /
+teams_members = db.Table('team_members',
                          db.Column('team_id',
                                    db.Integer,
                                    db.ForeignKey('Team.id'),
