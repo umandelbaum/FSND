@@ -47,10 +47,14 @@ The API will return two error types when requests fail:
 The API will also return several authentication errors if tokens are not present, invalid, or expired.
 
 ENDPOINT LIBRARY
+
 GET /heroes
+
 General:  This is a public endpoint.  Returns a list of heroes and their information in the database, including a list of the names of teams they are associated with, a success value, and the total number of heroes in the database.
 Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.  Returns 404 if no heroes are in the database or if the page number is too high
+
 Sample:  curl https://mandelbaumherodb.herokuapp.com/heroes?page=1
+
 Return: 
 {
     "heroes": [
@@ -101,9 +105,12 @@ Return:
 }
 
 GET /heroes/{hero_id}
+
 General:  This is a public endpoint.  Returns a particular hero's information and a success value.
 Returns 404 if no hero exists with the given ID.
+
 Sample:  curl https://mandelbaumherodb.herokuapp.com/heroes/1
+
 Return:
 {
     "hero":{
@@ -120,9 +127,12 @@ Return:
 }
 
 POST /heroes
+
 General:  This is a private route that requires Contributor or Administrator privileges.  Allows new heroes to be posted.  All values are needed to post a new hero.  Returns a success value and the new hero object if it was posted successfully.
 Returns 422 if a needed value is missing or if there was a database error.
+
 Sample:  curl https://mandelbaumherodb.herokuapp.com/heroes -X POST -H "Content-Type: application/json" -d '{'name': 'Green Lantern', 'hometown': 'Coast City', 'secret_identity': 'Hal Jordan', 'power_level'= 8}' -H "Authorization: bearer $TOKEN"
+
 Return:
 {
     "hero":{
@@ -137,10 +147,13 @@ Return:
 }
 
 PATCH /heroes/{hero_id}
+
 General:  This is a private route that requires Contributor or Administrator privileges.  Allows hero's information to be edited.  Any value can be changed - not all the values are needed to submit.  Returns a success value and the edited hero object if it was posted successfully.
 Returns 404 if no hero exists with the given ID.
 Returns 422 if there was a database error.
+
 Sample:  curl https://mandelbaumherodb.herokuapp.com/heroes/5 -X PATCH -H "Content-Type: application/json" -d '{'secret_identity': 'John Stewart'}' -H "Authorization: bearer $TOKEN"
+
 Return:
 {
     "hero":{
@@ -155,10 +168,13 @@ Return:
 }
 
 DELETE /heroes/{hero_id}
+
 General:  This is a private route that requires administrator privileges.  Deletes the hero with given hero ID.  Returns a success value and the hero's ID if the delete was successful.
 Returns 404 if no hero exists with the given ID.
 Returns 422 if there was a database error.
+
 Sample: curl https://mandelbaumherodb.herokuapp.com/heroes/5 -X DELETE -H "Authorization: bearer $TOKEN"
+
 Return:
 {
     "success":true,
@@ -166,10 +182,13 @@ Return:
 }
 
 POST /heroes/{hero_id}
+
 General:  This is a private route that requires Contributor or Administrator privileges.  Allows a hero to be linked to a team in the database. The team's id must be submitted as a JSON object.  Returns a success value and the edited hero object if it was posted successfully.
 Returns 404 if no hero exists with the given ID or if no team exists with the given team id.
 Returns 422 if there was a database error. 
+
 Sample:  curl https://mandelbaumherodb.herokuapp.com/heroes/5 -X POST -H "Content-Type: application/json" -d '{'team_id': '2'}' -H "Authorization: bearer $TOKEN"
+
 Return:
 {
     "hero":{
@@ -186,9 +205,12 @@ Return:
 }
 
 GET /teams
+
 General:  This is a public endpoint.  Returns a list of teams and their information in the database, including a list of the names of members associated with the team, a success value, and the total number of teams in the database.
 Results are paginated in groups of 10. Include a request argument to choose page number, starting from 1.  Returns 404 if no teams are in the database or if the page number is too high
+
 Sample:  curl https://mandelbaumherodb.herokuapp.com/teams?page=1
+
 Return:
 {
     "success":true,
@@ -224,9 +246,12 @@ Return:
 }
 
 GET /teams/{team_id}
+
 General:  This is a public endpoint.  Returns a particular teams's information and a success value.
 Returns 404 if no team exists with the given ID.
+
 Sample:  curl https://mandelbaumherodb.herokuapp.com/teams/1
+
 Result:
 {
     "success":true,
@@ -242,9 +267,12 @@ Result:
 }
 
 POST /teams
+
 General:  This is a private route that requires Contributor or Administrator privileges.  Allows new teams to be posted.  All values are needed to post a new team.  Returns a success value and the new team object if it was posted successfully.
 Returns 422 if a needed value is missing or if there was a database error.
+
 Sample:  curl https://mandelbaumherodb.herokuapp.com/teams -X POST -H "Content-Type: application/json" -d '{'name': 'Green Lantern Corps', 'location': 'Oa'}' -H "Authorization: bearer $TOKEN"
+
 Return:
 {
     "success":true,
@@ -257,10 +285,13 @@ Return:
 }
 
 PATCH /teams/{team_id}
+
 General:  This is a private route that requires Contributor or Administrator privileges.  Allows teams's information to be edited.  Any value can be changed - not all the values are needed to submit.  Returns a success value and the edited team object if it was posted successfully.
 Returns 404 if no team exists with the given ID.
 Returns 422 if there was a database error.
+
 Sample:  curl https://mandelbaumherodb.herokuapp.com/teams/4 -X PATCH -H "Content-Type: application/json" -d '{''location': 'Mogo'}' -H "Authorization: bearer $TOKEN"
+
 Return:
 {
     "success":true,
@@ -273,10 +304,13 @@ Return:
 }
 
 DELETE /teams/{team_id}
+
 General:  This is a private route that requires administrator privileges.  Deletes the team with given team ID.  Returns a success value and the team's ID if the delete was successful.
 Returns 404 if no team exists with the given ID.
 Returns 422 if there was a database error.
+
 Sample: curl https://mandelbaumherodb.herokuapp.com/teams/4 -X DELETE -H "Authorization: bearer $TOKEN"
+
 Return:
 {
     "success":true,
