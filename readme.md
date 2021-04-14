@@ -1,6 +1,6 @@
 SUPERHERO DATABASE API
 
-This project is the backend for a superhero database.
+This project is the backend for a superhero database.  It stores basic information about superheros and superhero teams.  It also links heroes to teams in a many-to-many relationship.
 
 All code follows PEP8 style guidelines in accordance with pycodestyle 2.7.0.
 
@@ -26,6 +26,10 @@ Use the following link to register and receive tokens to test the non-public end
 https://mandelbaum-fsnd.us.auth0.com/authorize?audience=herodb&response_type=token&client_id=gfTZ0dp5jrD5Ts3Xi3OxVdEsMo9v6Zz7&redirect_uri=http://localhost
 
 All tests are kept in the postman collection and should be maintained as updates are made to app functionality.  Tokens will need to be updated in the postman collection for tests - the built-in tokens expired on April 14, 2021.
+
+ROLES AND PERMISSIONS
+
+There are two different possible roles:  contributor and administrator.  The contributor can add heroes and teams to the database, update their information, and link heroes to teams.  The administrator do all of those actions and can additionally delete heroes and teams from the database.
 
 API REFERENCE
 
