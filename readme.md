@@ -18,18 +18,29 @@ The application is run on http://127.0.0.1:5000/ by default.
 
 The live application can be reached at https://mandelbaumherodb.herokuapp.com/
 
-TESTING
-
-In order to run tests, install Postman and import the herodb Tests Postman Collection.
-
-Use the following link to register and receive tokens to test the non-public endpoints:
-https://mandelbaum-fsnd.us.auth0.com/authorize?audience=herodb&response_type=token&client_id=gfTZ0dp5jrD5Ts3Xi3OxVdEsMo9v6Zz7&redirect_uri=http://localhost
-
-All tests are kept in the postman collection and should be maintained as updates are made to app functionality.  Tokens will need to be updated in the postman collection for tests - the built-in tokens expired on April 14, 2021.
-
 ROLES AND PERMISSIONS
 
 There are two different possible roles:  contributor and administrator.  The contributor can add heroes and teams to the database, update their information, and link heroes to teams.  The administrator do all of those actions and can additionally delete heroes and teams from the database.
+
+
+TESTING
+
+In order to run tests, use the following link to register and receive a contributor token and an administrator token to test the non-public endpoints:
+https://mandelbaum-fsnd.us.auth0.com/authorize?audience=herodb&response_type=token&client_id=gfTZ0dp5jrD5Ts3Xi3OxVdEsMo9v6Zz7&redirect_uri=http://localhost
+
+Once you receive tokens, createa local PostgreSQL databse with the name 'heroes'.  Then use the following commands to load the attached test database into your local database, set up your tokens to test, and run the test suite:
+pg_restore -d heroes testDB.dump -U {username}
+export ADMIN_TOKEN={your given administrator token}
+export CONTRIB_TOKEN={your given contributor token}
+python -m unittest -v test_app.py
+
+Please note the pg_restore may throw some errors due to different role names from the original database but those errors can be ignored.
+
+After the inital run of the test suite, you will need to reload the database for the next run.  The easiest way to do so is:
+flask db downgrade
+pg_restore -d heroes testDB.dump -U {username}
+
+These commands will again throw spurious errors which can be ignored.
 
 API REFERENCE
 
